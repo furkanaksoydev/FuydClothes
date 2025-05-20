@@ -1,0 +1,8 @@
+﻿<UserControl x:Class="fuydclothes.Views.AnaEkranView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="930" Width="1750">
+    <Grid>
+        <Image Source="../Images/fuyd.png" Stretch="UniformToFill" VerticalAlignment="Bottom"/>
+    </Grid>
+</UserControl>

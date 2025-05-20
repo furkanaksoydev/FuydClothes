@@ -1,0 +1,367 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="fuydclothes.Views.KullanicilarView"
+             Height="930" Width="1750">
+    <UserControl.Resources>
+
+        <Style x:Key="ButtonStyleModern" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="#E0E0E0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <!-- Dış gölge (sol üst) -->
+                            <Border Background="#E0E0E0"
+                            CornerRadius="20"
+                            Margin="1,1,0,0"
+                            SnapsToDevicePixels="True">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="White"
+                                              Direction="-135"
+                                              ShadowDepth="1.5"
+                                              BlurRadius="4"
+                                              Opacity="0.8"/>
+                                </Border.Effect>
+                            </Border>
+
+                            <!-- İç gölge (sağ alt) -->
+                            <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="20"
+                            SnapsToDevicePixels="True">
+                                <Border.Effect>
+                                    <DropShadowEffect x:Name="innerShadow"
+                                              Color="#B0B0B0"
+                                              Direction="45"
+                                              ShadowDepth="2"
+                                              BlurRadius="5"
+                                              Opacity="0.5"/>
+                                </Border.Effect>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Mouse Enter Efekti -->
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <!-- Renk Değişimi: Hover'da renk daha açık olacak -->
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#D1D1D1" Duration="0:0:0.2"/>
+                                        <!-- Gölge Değişimi: Hover'da daha belirgin olacak -->
+                                        <DoubleAnimation Storyboard.TargetName="innerShadow"
+                                                 Storyboard.TargetProperty="BlurRadius"
+                                                 To="10" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="innerShadow"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.7" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <!-- Mouse Leave Efekti: Fare butondan ayrıldığında eski haline dönecek -->
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <!-- Renk Değişimi: Mouse ayrılınca eski renkye dönecek -->
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#E0E0E0" Duration="0:0:0.2"/>
+                                        <!-- Gölge Değişimi: Gölge eski haline dönecek -->
+                                        <DoubleAnimation Storyboard.TargetName="innerShadow"
+                                                 Storyboard.TargetProperty="BlurRadius"
+                                                 To="5" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="innerShadow"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.5" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <!-- Mouse Pressed Efekti: Buton basıldığında renk değişir -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#D1D1D1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyleModern2" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                        CornerRadius="5"
+                        Background="#80FFFFFF"
+                        BorderBrush="#A0FFFFFF"
+                        BorderThickness="1"
+                        Padding="10"
+                        SnapsToDevicePixels="True"
+                        RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black"
+                                          BlurRadius="18"
+                                          ShadowDepth="2"
+                                          Opacity="0.4"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#60FFFFFF" Duration="0:0:0.3"/>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                To="#80FFFFFF" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleX"
+                                                 To="1.03" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleY"
+                                                 To="1.03" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#80FFFFFF" Duration="0:0:0.3"/>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                To="#A0FFFFFF" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleX"
+                                                 To="1" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleY"
+                                                 To="1" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#80FFFFFF"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#A0FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DataGridStyle12" TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="#303030"/>
+            <Setter Property="BorderBrush" Value="#303030"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="#FFFFFF"/>
+            <Setter Property="AlternatingRowBackground" Value="#F7F7F7"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="RowHeight" Value="40"/>
+            <Setter Property="ColumnHeaderHeight" Value="45"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10,10,3,3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                                <ScrollViewer.Template>
+                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Button Command="{x:Static DataGrid.SelectAllCommand}" Focusable="false" Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Grid.Row="1" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                                            <Grid Grid.Column="1" Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </ScrollViewer.Template>
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        TextBlock.TextAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="#DEDEDE"/>
+                    <Setter Property="Background" Value="#505050"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="White" Opacity="0.1" BlurRadius="5" ShadowDepth="0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridRow}">
+                        <Border 
+                        x:Name="RowBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        CornerRadius="4">
+
+                            <DataGridCellsPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="RowBorder" Property="Background" Value="#3D3D3D"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="RowBorder" Property="Background" Value="#505050"/>
+                                <Setter TargetName="RowBorder" Property="BorderBrush" Value="#D0D0D0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Border 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="10,10,3,3">
+                            <ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="#3C3C3C">
+
+        <Border BorderBrush="#FFE1E5E5" BorderThickness="3" CornerRadius="5" HorizontalAlignment="Left" Height="88" Margin="17,12,0,0" VerticalAlignment="Top" Width="260" Background="White"/>
+        <TextBox x:Name="seciliKisiTelNo" HorizontalAlignment="Left" Margin="23,54,0,0" TextWrapping="Wrap" IsReadOnly="True" Text="" VerticalAlignment="Top" Width="248" Height="40" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="Seçili Kişinin Telefon Numarası :" HorizontalAlignment="Left" Margin="22,15,0,0" VerticalAlignment="Top" Height="39" Width="250" FontSize="18" Foreground="Black" FontFamily="Red Hat Display"/>
+
+        <DataGrid Style="{DynamicResource DataGridStyle12}" x:Name="DataGKisiler" CanUserAddRows="False" AutoGenerateColumns="False"
+          HorizontalAlignment="Left" VerticalAlignment="Top" Height="756" Width="1600"
+          FontSize="18" Margin="10,103,0,0" HeadersVisibility="Column" ColumnHeaderHeight="50" IsMouseCapturedChanged="DataGKisiler_IsMouseCapturedChanged" FontFamily="Red Hat Display">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Kullanici_ID}" Header="ID" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Kullanici_Ad}" Header="Ad" Width="150" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Kullanici_Soyad}" Header="Soyad" Width="150" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Kullanici_TelNo}" Header="Telefon Numarası" Width="180" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Kullanici_Adres}" Header="Adres" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Kullanici_Kirmizimi}" Header="Kullanıcı Aktifliği" Width="190" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Düzenle" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Düzenle" Style="{StaticResource ButtonStyleModern2}" x:Name="duzenleButton" FontSize="12" Margin="5,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="duzenleButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Kırmızı Listeye Al" Width="170" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Kırmızı Listeye Al" Style="{StaticResource ButtonStyleModern2}" x:Name="kirmiziyaAlButton" FontSize="12" Margin="5,2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="kirmiziyaAlButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox x:Name="AraTxtBox" HorizontalAlignment="Left" Margin="527,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="322" Height="40" FontSize="16" VerticalContentAlignment="Center"/>
+        <Label Content="Telefon Numarası" HorizontalAlignment="Left" Margin="526,8,0,0" VerticalAlignment="Top" Height="39" Width="323" FontSize="24" Foreground="White" FontFamily="Red Hat Display"/>
+        <Button x:Name="araButton" Style="{StaticResource ButtonStyleModern}" Content="Ara" HorizontalAlignment="Left" 
+                Margin="862,54,0,0" VerticalAlignment="Top" Height="42" Width="147" FontSize="16" BorderBrush="Black" Click="AraButton_Click"/>
+        <Button x:Name="aramayiTemizleButton" Style="{StaticResource ButtonStyleModern}" Content="Aramayı Temizle" 
+                HorizontalAlignment="Left" Margin="1023,54,0,0" VerticalAlignment="Top" Height="42" Width="147" 
+                FontSize="16" BorderBrush="Black" Click="AramayiTemizleButton_Click"/>
+        <Button x:Name="yeniKullaniciKayitButton" Style="{StaticResource ButtonStyleModern}" Content="Yeni Kullanıcı Kayıt" 
+                HorizontalAlignment="Left" Margin="1212,8,0,0" VerticalAlignment="Top" Height="88" Width="167" 
+                FontSize="18" Foreground="#FF162029" Click="yeniKullaniciKayitButton_Click"/>
+        <Button x:Name="kirmiziListeButton" Style="{StaticResource ButtonStyleModern}" Content="Kırmızı Liste" HorizontalAlignment="Left" Margin="1416,8,0,0" VerticalAlignment="Top" Height="88" Width="194" FontSize="20" BorderBrush="#FFE1E5E5" BorderThickness="2,2,2,2" Click="kirmiziListeButton_Click"/>
+    </Grid>
+</UserControl>

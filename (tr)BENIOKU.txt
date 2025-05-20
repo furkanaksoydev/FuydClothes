@@ -1,0 +1,61 @@
+📌 İŞLEV
+Bu uygulama, bir kıyafet mağazası adına kullanıcı, ürün stoğu ve sipariş yönetimi işlevlerini içermektedir.
+
+
+🖥️ EKRANLAR
+  👤 Kullanıcılar Ekranı
+  
+  Kullanıcıları görüntüleme
+
+  Yeni kullanıcı ekleme
+
+  Kullanıcı bilgilerini güncelleme
+
+  Kullanıcıyı kırmızı listeye alarak aktifliğini kontrol etme
+
+  Kırmızı listede bulunan kullanıcıları da görüntüleyip düzenleyebilme
+
+
+  🧥 Ürünler Ekranı
+
+  Ürün stoğunu görüntüleme
+
+  Stok güncelleme
+
+  Ürünü pasif duruma alma
+
+  Pasif durumdaki ürünleri görüntüleyip düzenleyebilme
+
+
+  📦 Siparişler Ekranı
+  
+  Mevcut siparişleri görüntüleme
+
+  Sipariş içeriğini görüntüleme ve düzenleme
+
+  Siparişe yeni ürün ekleme
+
+  Siparişi iptal etme
+
+  Siparişin ulaşıp ulaşmadığını kontrol etme
+
+  Yeni sipariş oluşturma
+
+  🔒 Not: Yeni sipariş oluşturabilmek için, siparişi verecek olan kullanıcının ve ürünün sistemde önceden kayıtlı olması zorunludur. Bu sayede denetim artırılarak yanlış sipariş girişlerinin önüne geçilmiştir.
+
+
+⚙️ ÖZELLİKLER
+Uygulamanın veritabanı SQL Server Management Studio ile oluşturulmuş, ön yüzü ise C# diliyle geliştirilmiş ve XAML ile kullanıcı arayüzü tasarlanmıştır.
+
+
+💻 Kullanılan Teknolojiler
+
+  C#
+
+  XAML
+
+  UI Tasarım
+
+  FontAwesome
+
+  SQLite --> Sanal olarak herkese açık bir şekilde kullanılabilmesi adına veritabanı dosyasını T-SQL dil formatından el ile SQLite dil formatına dönüştürdüm.

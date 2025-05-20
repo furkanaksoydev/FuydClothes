@@ -1,0 +1,253 @@
+﻿<UserControl x:Class="fuydclothes.Views.KullaniciGuncelleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="930" Width="1750">
+    <UserControl.Resources>
+
+        <Style x:Key="ButtonStyleModern" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                        CornerRadius="5"
+                        Background="#80FFFFFF"
+                        BorderBrush="#A0FFFFFF"
+                        BorderThickness="1"
+                        Padding="10"
+                        SnapsToDevicePixels="True"
+                        RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black"
+                                          BlurRadius="18"
+                                          ShadowDepth="2"
+                                          Opacity="0.4"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#60FFFFFF" Duration="0:0:0.3"/>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                To="#80FFFFFF" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleX"
+                                                 To="1.03" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleY"
+                                                 To="1.03" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                To="#80FFFFFF" Duration="0:0:0.3"/>
+                                        <ColorAnimation Storyboard.TargetName="border"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                To="#A0FFFFFF" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleX"
+                                                 To="1" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform"
+                                                 Storyboard.TargetProperty="ScaleY"
+                                                 To="1" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#80FFFFFF"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#A0FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="29"/>
+            <Setter Property="Width" Value="231"/>
+            <Setter Property="BorderBrush" Value="#FF313F42"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Border x:Name="Border"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            BorderThickness="1"
+            CornerRadius="10"
+            Padding="5"
+            SnapsToDevicePixels="True">
+                <Grid>
+                    <Path x:Name="Arrow"
+                  Fill="Black"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Margin="0,0,5,0"
+                  Data="M 0 0 L 4 4 L 8 0 Z"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Arrow" Property="Fill" Value="#FF4A6E78"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Arrow" Property="Fill" Value="#FF2C3E50"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Arrow" Property="Fill" Value="#FFAAAAAA"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="CustomComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="29"/>
+            <Setter Property="Width" Value="231"/>
+            <Setter Property="BorderBrush" Value="#FF313F42"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10" />
+                            <ToggleButton Grid.Column="2"
+                                  x:Name="ToggleButton"
+                                  Template="{StaticResource ComboBoxToggleButton}"
+                                  Focusable="False"
+                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                  ClickMode="Press"
+                                  Background="Transparent"/>
+                            <ContentPresenter x:Name="ContentSite"
+                                      IsHitTestVisible="False"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      Margin="5,3,25,3"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left" />
+                            <Popup x:Name="Popup"
+                           Placement="Bottom"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           AllowsTransparency="True"
+                           Focusable="False"
+                           PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                              SnapsToDevicePixels="True"
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="200">
+                                    <Border x:Name="DropDownBorder"
+                                    Background="White"
+                                    BorderBrush="#FF313F42"
+                                    BorderThickness="1"
+                                    CornerRadius="5"/>
+                                    <ScrollViewer Margin="4,6,4,6"
+                                          SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#FFE5E5E5"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FFAAAAAA"/>
+                                <Setter Property="Foreground" Value="#FF888888"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF4A6E78"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="#2E2E2E">
+        <Button x:Name="geriDonButton" Style="{StaticResource ButtonStyleModern}" HorizontalAlignment="Left" VerticalAlignment="Top"
+        Margin="10" Width="35" Height="35" Click="GeriDon_Click" BorderBrush="Transparent" Background="Transparent">
+            <Button.Content>
+                <Image Source="../Images/geridon2.png" Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button.Content>
+        </Button>
+        <Border BorderBrush="Black" CornerRadius="5" BorderThickness="1" HorizontalAlignment="Left" Height="515" Margin="531,194,0,0" VerticalAlignment="Top" Width="351">
+            <Border.Background>
+                <SolidColorBrush Color="White" Opacity="0.6"/>
+            </Border.Background>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Left" Height="458" Margin="151,194,0,0" VerticalAlignment="Top" Width="360">
+            <Border.Background>
+                <SolidColorBrush Color="White" Opacity="0.6"/>
+            </Border.Background>
+        </Border>
+        <Label Content="Kullanıcı ID : " HorizontalAlignment="Left" Margin="159,228,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Eski Kullanıcı Ad : " HorizontalAlignment="Left" Margin="159,261,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Eski Kullanıcı Soyad : " HorizontalAlignment="Left" Margin="159,294,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Eski Kullanıcı Tel No : " HorizontalAlignment="Left" Margin="159,327,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Eski Kullanıcı Adres : " HorizontalAlignment="Left" Margin="159,360,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Eski Kullanıcı Aktifliği : " HorizontalAlignment="Left" Margin="159,591,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <TextBox IsReadOnly="True" x:Name="eskiKullanici_IDTxtBox" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="293,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="29" FontSize="14" VerticalContentAlignment="Center" MaxLength="11"/>
+        <TextBox IsReadOnly="True" x:Name="eskiKullanici_AdTxtBox" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="293,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="28" FontSize="14" VerticalContentAlignment="Center"/>
+        <TextBox IsReadOnly="True" x:Name="eskiKullanici_SoyadTxtBox" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="293,294,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="29" FontSize="14" VerticalContentAlignment="Center"/>
+        <TextBox IsReadOnly="True" x:Name="eskiKullanici_TelNoTxtBox" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="293,327,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="29" FontSize="14" VerticalContentAlignment="Center"/>
+        <TextBox IsReadOnly="True" x:Name="eskiKullanici_AdresTxtBox" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="293,360,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="226" FontSize="14" VerticalContentAlignment="top"/>
+        <TextBox IsReadOnly="True" x:Name="eskiKullanici_AktifMiTxtBox" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="293,591,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="28" FontSize="14" VerticalContentAlignment="Center" MaxLength="11"/>
+        <Label Content="GÜNCEL KİŞİ BİLGİSİNİ GİRİNİZ " HorizontalAlignment="Left" Margin="598,204,0,0" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Kullanıcı ID : " HorizontalAlignment="Left" Margin="545,228,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Yeni Kullanıcı Ad : " HorizontalAlignment="Left" Margin="545,261,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Yeni Kullanıcı Soyad : " HorizontalAlignment="Left" Margin="545,294,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Yeni Kullanıcı Tel No: " HorizontalAlignment="Left" Margin="545,327,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Yeni Kullanıcı Adres : " HorizontalAlignment="Left" Margin="545,360,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Yeni Kullanıcı Aktifliği : " HorizontalAlignment="Left" Margin="545,591,0,0" VerticalAlignment="Top" FontFamily="Red Hat Display" FontWeight="Bold" Foreground="White"/>
+        <TextBox IsReadOnly="True" x:Name="yeniKullanici_IDTxtBox" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="679,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="29" FontSize="12" VerticalContentAlignment="Center" MaxLength="11"/>
+        <TextBox x:Name="yeniKullanici_AdTxtBox" MaxLength="20" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="679,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="28" FontSize="12" VerticalContentAlignment="Center" PreviewTextInput="yeniKullanici_AdTxtBox_PreviewTextInput"/>
+        <TextBox x:Name="yeniKullanici_SoyadTxtBox" MaxLength="20" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="679,294,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="190" Height="29" FontSize="12" VerticalContentAlignment="Center" PreviewTextInput="yeniKullanici_SoyadTxtBox_PreviewTextInput"/>
+        <TextBox x:Name="yeniKullanici_TelNoTxtBox" MaxLength="11" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="679,327,0,0" Text="" VerticalAlignment="Top" Width="190" Height="29" FontSize="12" VerticalContentAlignment="Center" PreviewTextInput="yeniKullanici_TelNoTxtBox_PreviewTextInput"/>
+        <TextBox x:Name="yeniKullanici_AdresTxtBox" MaxLength="600" Style="{StaticResource CustomTextBoxStyle}" HorizontalAlignment="Left" Margin="679,360,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="226" FontSize="12" VerticalContentAlignment="top"/>
+        <ComboBox x:Name="yeniKullanici_AktifMiCmbBox" Style="{StaticResource CustomComboBoxStyle}" HorizontalAlignment="Left" Margin="679,591,0,0" Text="" VerticalAlignment="Top" Width="190" Height="28" FontSize="12" VerticalContentAlignment="Center"/>
+        <Button x:Name="kaydetButton" Style="{StaticResource ButtonStyleModern}" Content="Kaydet" HorizontalAlignment="Left" Margin="542,643,0,0" VerticalAlignment="Top" Height="55" Width="136" FontSize="16" BorderThickness="3,3,3,3" RenderTransformOrigin="1,1" Click="kaydetButton_Click" Foreground="White"/>
+        <Button x:Name="duzenlemeleriGeriAlButton" Style="{StaticResource ButtonStyleModern}" Content="Düzenlemeleri&#xA;Geri Al" HorizontalAlignment="Left" Margin="739,643,0,0" VerticalAlignment="Top" Height="55" Width="136" FontSize="12" BorderThickness="3,3,3,3" RenderTransformOrigin="1,1" Click="duzenlemeleriGeriAlButton_Click" Foreground="White"/>
+    </Grid>
+</UserControl>
